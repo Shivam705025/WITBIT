@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Glittering Dark Website</title>
+  <script>
+    function connectMetamask() {
+  if (typeof window.ethereum !== 'undefined') {
+    ethereum.request({ method: 'eth_requestAccounts' })
+      .then(accounts => {
+        const address = accounts[0];
+        window.location.href = `connected.html?address=${address}`;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  } else {
+    console.error('Metamask not detected');
+  }
+}
+  </script>
+  <style>
+  body {
+  background-color: #111;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#glitter-container {
+  position: relative;
+}
+
+#coin-image {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  animation: glitter 3s infinite;
+}
+
+@keyframes glitter {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(10); }
+  100% { filter: brightness(1); }
+}
+
+#connect-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: gold;
+  color: #111;
+  font-size: 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#connect-button:hover {
+  background-color: #ffd700;
+}
+</style>
+</head>
+<body>
+  <div id="glitter-container">
+    <img id="coin-image" src="pngwing.com (2).png" alt="Gold Coin">
+    <button id="connect-button" onclick="connectMetamask()">Connect</button>
+  </div>
+</body>
+</html>
