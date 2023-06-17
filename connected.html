@@ -3,6 +3,20 @@
 <head>
   
   <title>Connected Wallet Address</title>
+  <script>
+    function getQueryParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(param);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const address = getQueryParam('address');
+  if (address) {
+    document.getElementById('wallet-address').textContent = address;
+  }
+});
+  </script>
   <style>
     body {
   background-color: #111;
