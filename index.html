@@ -4,65 +4,74 @@
   <title>Glittering Dark Website</title>
   <script>
     function connectMetamask() {
-  if (typeof window.ethereum !== 'undefined') {
-    ethereum.request({ method: 'eth_requestAccounts' })
-      .then(accounts => {
-        const address = accounts[0];
-        window.location.href = `connected.html?address=${address}`;
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  } else {
-    console.error('Metamask not detected');
-  }
-}
+      if (typeof window.ethereum !== 'undefined') {
+        ethereum.request({ method: 'eth_requestAccounts' })
+          .then(accounts => {
+            const address = accounts[0];
+            window.location.href = `connected.html?address=${address}`;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      } else {
+        console.error('Metamask not detected');
+      }
+    }
   </script>
   <style>
-  body {
-  background-color: #111;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    body {
+      background-color: #111;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
+    #background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
 
-#coin-image {
-  display: block;
-  margin: 0 auto;
-  width: 600px;
-  height: 600px;
-}
+    #glitter-container {
+      position: relative;
+    }
 
-#connect-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: gold;
-  color: #111;
-  font-size: 24px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    #connect-button {
+      display: block;
+      margin: 20px auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 75px;
+      background-color: gold;
+      border: none;
+      opacity: 0;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
 
-#connect-button:hover {
-  background-color: #ffd700;
-}
-#background-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-</style>
+    #connect-button:before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: gold;
+      transform: scale(1.1);
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+
+    #connect-button:hover:before {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
   <video id="background-video" autoplay loop muted>
@@ -70,7 +79,7 @@
     Your browser does not support the video tag.
   </video>
   <div id="glitter-container">
-    <button id="connect-button" onclick="connectMetamask()">Connect</button>
+    <button id="connect-button" onclick="connectMetamask()"></button>
   </div>
 </body>
 </html>
